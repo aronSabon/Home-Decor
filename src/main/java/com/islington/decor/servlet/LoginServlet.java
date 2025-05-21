@@ -32,24 +32,54 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//
+//        CustomerService customerService = new CustomerServiceImpl();
+//        Customer customer = customerService.checkCustomer(username, password); // You need to implement this method
+//
+//        if (customer != null && customer.getPassword().equals(password)) {
+//            // Successful login
+//            request.getSession().setAttribute("customer", customer);
+//            response.sendRedirect("Dashboard.jsp"); // Replace with your post-login page
+//        } else {
+//            // Failed login
+//        	System.out.println("erosldkjf");
+//            request.setAttribute("error", "Invalid username or password");
+//            request.getRequestDispatcher("Login.jsp").forward(request, response);
+//        }
+//    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         CustomerService customerService = new CustomerServiceImpl();
-        Customer customer = customerService.checkCustomer(username, password); // You need to implement this method
+        Customer customer = customerService.checkCustomer(username, password); // Implemented separately
 
         if (customer != null && customer.getPassword().equals(password)) {
-            // Successful login
             request.getSession().setAttribute("customer", customer);
-            response.sendRedirect("Dashboard.jsp"); // Replace with your post-login page
+
+            // Redirect based on role
+            String role = customer.getRole(); // Ensure there's a getRole() method in Customer
+            if ("superadmin".equalsIgnoreCase(role)) {
+                response.sendRedirect("backend/AdminDashboard.jsp");
+            } else if ("customer".equalsIgnoreCase(role)) {
+                response.sendRedirect("Dashboard.jsp");
+            } else {
+                // Unknown role — redirect to a generic page or error
+                response.sendRedirect("Unauthorized.jsp");
+            }
+
         } else {
             // Failed login
-        	System.out.println("erosldkjf");
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
+
 }

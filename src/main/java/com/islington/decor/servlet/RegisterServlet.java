@@ -56,6 +56,7 @@ public class RegisterServlet extends HttpServlet {
 		customer.setLastName(lastName);
 		customer.setUsername(username);
 		customer.setPassword(password);
+		customer.setRole("customer");
 		
 		CustomerService customerService = new CustomerServiceImpl();
 		customerService.addCustomer(customer);

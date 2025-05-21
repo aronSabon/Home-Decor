@@ -8,10 +8,17 @@ public class Customer {
 	private String lastName;
 	private String password;
 	private String username;
+	private String role;
 //	private List<Purchase> purchases;
 	
 	public int getCustomerId() {
 		return customerId;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
@@ -41,16 +48,10 @@ public class Customer {
 		this.username = username;
 	}
 	
-//	public List<Purchase> getPurchases() {
-//		return purchases;
-//	}
-//	public void setPurchases(List<Purchase> purchases) {
-//		this.purchases = purchases;
-//	}
-	@Override
+@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", username=" + username + "]";
+		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", password=" + password + ", username=" + username + ", role=" + role + "]";
 	}
 	
 	

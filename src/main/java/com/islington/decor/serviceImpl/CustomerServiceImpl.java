@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-		String sql = "insert into customer(first_name,last_name,username,password)values('"+customer.getFirstName()+"','"+customer.getLastName()+"','"+customer.getUsername()+"','"+customer.getPassword()+"')";
+		String sql = "insert into customer(first_name,last_name,username,password,role)values('"+customer.getFirstName()+"','"+customer.getLastName()+"','"+customer.getUsername()+"','"+customer.getPassword()+"','"+customer.getRole()+"')";
 		try {
 			Statement statement = Database.connectDatabase().createStatement();
 			statement.execute(sql);
@@ -69,6 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 	            customer.setLastName(rs.getString("last_name"));
 	            customer.setUsername(rs.getString("username"));
 	            customer.setPassword(rs.getString("password"));
+	            customer.setRole(rs.getString("role"));
 	        }
 
 	    } catch (SQLException e) {
@@ -77,6 +78,36 @@ public class CustomerServiceImpl implements CustomerService {
 
 	    return customer;
 	}
+
+	@Override
+	public Customer doesCustomerExist(String username) {
+	    Customer customer = null;
+
+	    String sql = "SELECT * FROM customer WHERE username = ?";
+	    try (Connection conn = Database.connectDatabase();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, username);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            customer = new Customer();
+	            customer.setCustomerId(rs.getInt("customer_id"));
+	            customer.setFirstName(rs.getString("first_name"));
+	            customer.setLastName(rs.getString("last_name"));
+	            customer.setUsername(rs.getString("username"));
+	            customer.setPassword(rs.getString("password")); // be cautious with passwords
+	            customer.setRole(rs.getString("role"));
+
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return customer;
+	}
+
 
 
 //	 @Override

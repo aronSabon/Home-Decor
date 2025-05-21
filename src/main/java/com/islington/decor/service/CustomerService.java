@@ -13,4 +13,5 @@ public interface CustomerService {
 //	Customer getCustomerByUsername(String username);
 	void updateCustomer(Customer customer);
 	Customer checkCustomer(String username,String password);
+	Customer doesCustomerExist(String username);
 }
