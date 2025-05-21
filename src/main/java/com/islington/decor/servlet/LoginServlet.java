@@ -6,10 +6,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import com.islington.decor.model.Customer;
+import com.islington.decor.model.Product;
 import com.islington.decor.service.CustomerService;
+import com.islington.decor.service.ProductService;
 import com.islington.decor.serviceImpl.CustomerServiceImpl;
+import com.islington.decor.serviceImpl.ProductServiceImpl;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -69,6 +73,12 @@ public class LoginServlet extends HttpServlet {
             if ("superadmin".equalsIgnoreCase(role)) {
                 response.sendRedirect("backend/AdminDashboard.jsp");
             } else if ("customer".equalsIgnoreCase(role)) {
+            	
+            	  ProductService productService = new ProductServiceImpl();
+                  List<Product> latestProducts = productService.getLatestThreeProducts();
+
+                  request.setAttribute("latestProducts", latestProducts);
+            	
                 response.sendRedirect("Dashboard.jsp");
             } else {
                 // Unknown role — redirect to a generic page or error
@@ -81,5 +91,11 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
+   
+    
+    
+    
+    
+    
 
 }

@@ -26,6 +26,15 @@
 		<link href="static/css/tiny-slider.css" rel="stylesheet">
 		<link href="static/css/style.css" rel="stylesheet">
 		<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+		
+		<style type="text/css">
+		.product-thumbnail {
+    width: 300px;
+    height: 300px;
+    object-fit: cover; /* Ensures the image fills the box without distortion */
+    border-radius: 10px; /* Optional: rounded corners */
+}
+		</style>
 	</head>
 
 	<body>
@@ -85,117 +94,23 @@
 		      	<div class="row">
 
 		      		<!-- Start Column 1 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-3.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
+					<c:forEach var="product" items="${productList}">
+    <div class="col-12 col-md-4 col-lg-3 mb-5">
+        <a class="product-item" href="#">
+            <img src="static/images/${product.imageName}" class="img-fluid product-thumbnail">
+            <h3 class="product-title">${product.name}</h3>
+            <strong class="product-price">Rs. ${product.price}</strong>
 
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div> 
+            <span class="icon-cross">
+                <img src="static/images/cross.svg" class="img-fluid">
+            </span>
+        </a>
+    </div>
+</c:forEach>
+
+
 					<!-- End Column 1 -->
-						
-					<!-- Start Column 2 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-1.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div> 
-					<!-- End Column 2 -->
-
-					<!-- Start Column 3 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-2.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Kruzo Aero Chair</h3>
-							<strong class="product-price">$78.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 3 -->
-
-					<!-- Start Column 4 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-3.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Ergonomic Chair</h3>
-							<strong class="product-price">$43.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 4 -->
-
-
-					<!-- Start Column 1 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-3.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div> 
-					<!-- End Column 1 -->
-						
-					<!-- Start Column 2 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-1.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div> 
-					<!-- End Column 2 -->
-
-					<!-- Start Column 3 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-2.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Kruzo Aero Chair</h3>
-							<strong class="product-price">$78.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 3 -->
-
-					<!-- Start Column 4 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="static/images/product-3.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Ergonomic Chair</h3>
-							<strong class="product-price">$43.00</strong>
-
-							<span class="icon-cross">
-								<img src="static/images/cross.svg" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 4 -->
+					
 
 		      	</div>
 		    </div>

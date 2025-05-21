@@ -13,16 +13,16 @@ import com.islington.decor.service.ProductService;
 import com.islington.decor.serviceImpl.ProductServiceImpl;
 
 /**
- * Servlet implementation class DashboardServlet
+ * Servlet implementation class ThreeProductServlet
  */
-@WebServlet("/DashboardServlet")
-public class DashboardServlet extends HttpServlet {
+@WebServlet("/ThreeProductServlet")
+public class ThreeProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DashboardServlet() {
+    public ThreeProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,15 @@ public class DashboardServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		 ProductService productService = new ProductServiceImpl();
-	        List<Product> latestProducts = productService.getLatestThreeProducts();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	        request.setAttribute("latestProducts", latestProducts);
-	        System.out.println("lastsd produt"+latestProducts);
-        request.getRequestDispatcher("Dashboard.jsp").forward(request, response);
-	}
+        ProductService productService = new ProductServiceImpl();
+        List<Product> latestProducts = productService.getLatestThreeProducts();
 
+        request.setAttribute("latestProducts", latestProducts);
+        request.getRequestDispatcher("Home.jsp").forward(request, response);
+    }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -48,7 +47,4 @@ public class DashboardServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
-	
-	 
 }

@@ -11,4 +11,5 @@ public interface ProductService {
 	void deleteProductById(int id);
 	Product getProductById(int id);
 	void updateProduct(Product product);
+	List<Product> getLatestThreeProducts();
 }

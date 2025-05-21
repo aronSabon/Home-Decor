@@ -52,18 +52,12 @@ public class AddProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("post called");
-
 		// Instead of request.getParameter(), use getPart() and read strings for text fields
 		Part namePart = request.getPart("name");
 		Part pricePart = request.getPart("price");
 		Part filePart = request.getPart("image");
-
 		String name = getValueFromPart(namePart);
 		String priceStr = getValueFromPart(pricePart);
-
-		System.out.println("Name: " + name);
-		System.out.println("Price string: " + priceStr);
-
 		int price = 0;
 		try {
 			price = Integer.parseInt(priceStr);
@@ -73,90 +67,7 @@ public class AddProductServlet extends HttpServlet {
 			request.getRequestDispatcher("/backend/AddProduct.jsp").forward(request, response);
 			return;
 		}
-
-		//	    String imageName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-		//	    String uploadPath = getServletContext().getRealPath("/static/images");
-		//	   
-		//	   
-		//	    File uploadDir = new File(uploadPath);
-		//	    if (!uploadDir.exists()) {
-		//	        uploadDir.mkdirs();
-		//	    }
-		//
-		//	    try {
-		//	        filePart.write(uploadPath + File.separator + imageName);
-		//	        File savedFile = new File(uploadPath, imageName);
-		//	        if(savedFile.exists()) {
-		//	            System.out.println("Image saved successfully at: " + savedFile.getAbsolutePath());
-		//	        } else {
-		//	            System.out.println("Failed to save image.");
-		//	        }
-		//	    } catch(IOException e) {
-		//	        e.printStackTrace();
-		//	    }
-		// Get the uploaded image part
 		String imageName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-
-		// ✅ Get the actual project root directory
-		//	    String projectRootPath = new File("").getAbsolutePath();
-		//
-		//	    // ✅ Path to src/main/webapp/static/images (during development)
-		//	    String uploadPath = projectRootPath + "/src/main/webapp/static/images";
-		//
-		//	    // Create directory if it doesn't exist
-		//	    File uploadDir = new File(uploadPath);
-		//	    if (!uploadDir.exists()) {
-		//	        uploadDir.mkdirs();
-		//	    }
-		//
-		//	    // ✅ Save the uploaded file to the actual src folder
-		////	    filePart.write(uploadPath + File.separator + imageName);
-		//	    try {
-		//	        filePart.write(uploadPath + File.separator + imageName);
-		//	        File savedFile = new File(uploadPath, imageName);
-		//	        if(savedFile.exists()) {
-		//	            System.out.println("Image saved successfully at: " + savedFile.getAbsolutePath());
-		//	        } else {
-		//	            System.out.println("Failed to save image.");
-		//	        }
-		//	    } catch(IOException e) {
-		//	        e.printStackTrace();
-		//	    }
-
-
-
-
-
-
-		//	    String pathhh = getServletContext().getRealPath("/static/images");
-		//	    System.out.println("pathhh"+ pathhh);
-		//	    System.out.println("pathhh"+ pathhh);
-		//	    String projectPath = System.getProperty("user.dir");
-		//	    System.out.println("project dir" + projectPath);
-		//	    String uploadPath = projectPath + "\\src\\main\\webapp\\static\\images";
-		//
-		//	    File uploadDir = new File(uploadPath);
-		//	    if (!uploadDir.exists()) {
-		//	        uploadDir.mkdirs();
-		//	    }
-		//
-		//	    filePart.write(uploadPath + File.separator + imageName);
-		//	    System.out.println("Image saved successfully at: " + uploadPath + File.separator + imageName);
-		// Step 1: Get the path to a known resource in the project (like your servlet class)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		String fullClassPath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		File currentPath = new File(fullClassPath);
 		File projectRootlater = currentPath.getParentFile().getParentFile(); // Adjust depth as needed
@@ -168,7 +79,6 @@ public class AddProductServlet extends HttpServlet {
 		if (!uploadDir.exists()) {
 			uploadDir.mkdirs();
 		}
-
 		filePart.write(lemonPath + File.separator + imageName);
 		System.out.println("Image saved successfully at: " + lemonPath + File.separator + imageName);
 
@@ -176,12 +86,9 @@ public class AddProductServlet extends HttpServlet {
 		product.setName(name);
 		product.setPrice(price);
 		product.setImageName(imageName);
-
 		ProductService productService = new ProductServiceImpl();
 		productService.addProduct(product);
-
 		System.out.println("Product added: " + product);
-
 		request.setAttribute("success", "Product added successfully!");
 		request.getRequestDispatcher("/backend/AddProduct.jsp").forward(request, response);
 	}
